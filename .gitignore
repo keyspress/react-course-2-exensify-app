@@ -1,5 +1,2 @@
 node_modules/
-publikc/bundle.js
-publikc/bundle.js.map
-publikc/styles.css
-publikc/styles.css.map
+publikc/dist/
