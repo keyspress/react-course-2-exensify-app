@@ -13,30 +13,73 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-database.ref().set({
-  name: 'Georgie McDoodle',
-  age: 88,
-  isSingle: true,
-  location: {
-    city: 'Whoville',
-    country: 'Bizlandia'
-  }
-}).then(() => {
-  console.log('Data is saved!');
-}).catch((e) => {
-  console.log('This failed. ', e);
+const watch = database.ref().on('value', (snapshot) => {
+  const person = snapshot.val();
+  console.log(`${person.name} is a ${person.job.title} at ${person.job.company}.`);
 });
 
-// database.ref().set('This is my data.');
+setTimeout(() => {
+  database.ref('name').set('Georgie Porgie McDoodle');
+}, 3000)
 
-// database.ref('age').set(69);
-// database.ref('location/city').set('Whyville');
+// const onValueChange = database.ref().on('value', (snapshot) => {
+//   console.log(snapshot.val());
+// }, (e) => {
+//   console.log('error with data fetching', e);
+// });
 
-database.ref('attributes').set({
-  height: 844,
-  weight: 884443
-}).then(() => {
-  console.log('Attributes have been set');
-}).catch((e) => {
-  console.log('This has failed. ', e);
-});
+// setTimeout(() => {
+//   database.ref('age').set(68);
+// }, 3500);
+
+// setTimeout(() => {
+//   database.ref().off(onValueChange);
+// }, 7000);
+
+// setTimeout(() => {
+//   database.ref('age').set(67);
+// }, 10500);
+
+// database.ref('location/city')
+//   .once('value')
+//   .then((snapshot) => {
+//     const val = snapshot.val();
+//     console.log(val);
+//   })
+//   .catch((e) => {
+//     console.log('error fetching data', e);
+//   });
+
+// database.ref().set({
+//   name: 'Georgie McDoodle',
+//   age: 88,
+//   stressLevel: 6,
+//   job: {
+//     title: 'Wanderer',
+//     company: 'Government'
+//   },
+//   location: {
+//     city: 'Whoville',
+//     country: 'Bizlandia'
+//   }
+// }).then(() => {
+//   console.log('Data is saved!');
+// }).catch((e) => {
+//   console.log('This failed. ', e);
+// });
+
+// database.ref().update({
+//   stressLevel: 9,
+//   'job/company': 'Apple',
+//   'location/city': 'Whereville'
+// });
+
+// database.ref()
+//   .remove()
+//   .then(() => {
+//     console.log('data was removed');
+//   }).catch((e) => {
+//     console.log('did not remove data', e);
+//   });
+
+// database.ref('isSingle').set(null);
