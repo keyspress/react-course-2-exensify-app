@@ -13,14 +13,50 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-const watch = database.ref().on('value', (snapshot) => {
-  const person = snapshot.val();
-  console.log(`${person.name} is a ${person.job.title} at ${person.job.company}.`);
+database.ref('expenses').on('value', (snapshot) => {
+  const val = snapshot.val();
+  console.log(val);
 });
 
-setTimeout(() => {
-  database.ref('name').set('Georgie Porgie McDoodle');
-}, 3000)
+// database.ref('expenses')
+//   .once('value')
+//   .then((snapshot) => {
+//     const expenses = [];
+//     snapshot.forEach((childSnapshot) => {
+//       expenses.push({
+//         id: childSnapshot.key,
+//         ...childSnapshot.val()
+//       });
+//     });
+//     console.log(expenses);
+//   });
+
+// database.ref('expenses').push({
+//   description: 'Comic Books',
+//   note: 'Do not steal',
+//   amount: 800,
+//   createdAt: 1000
+// });
+
+
+
+
+// database.ref('notes/-LC9Rc1z6-e8fZ770GGq').remove();
+
+// database.ref('notes').push({
+//   title: 'topics',
+//   body: 'things, stuff, items'
+// });
+
+
+// const watch = database.ref().on('value', (snapshot) => {
+//   const person = snapshot.val();
+//   console.log(`${person.name} is a ${person.job.title} at ${person.job.company}.`);
+// });
+
+// setTimeout(() => {
+//   database.ref('name').set('Georgie Porgie McDoodle');
+// }, 3000)
 
 // const onValueChange = database.ref().on('value', (snapshot) => {
 //   console.log(snapshot.val());
