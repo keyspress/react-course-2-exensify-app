@@ -1,2 +1,4 @@
 node_modules/
 publikc/dist/
+.env.test
+.env.development
