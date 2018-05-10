@@ -13,10 +13,29 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-database.ref('expenses').on('value', (snapshot) => {
-  const val = snapshot.val();
-  console.log(val);
+database.ref('expenses').on('child_removed', (snapshot) => {
+  console.log(snapshot.key, snapshot.val());
 });
+
+database.ref('expenses').on('child_changed', (snapshot) => {
+  console.log(snapshot.key, snapshot.val());
+});
+
+database.ref('expenses').on('child_added', (snapshot) => {
+  console.log(snapshot.key, snapshot.val());
+});
+
+// database.ref('expenses').on('value', (snapshot) => {
+//   const val = snapshot.val();
+//   const expenses = [];
+//     snapshot.forEach((childSnapshot) => {
+//       expenses.push({
+//         id: childSnapshot.key,
+//         ...childSnapshot.val()
+//       });
+//     });
+//     console.log(expenses);
+// });
 
 // database.ref('expenses')
 //   .once('value')
@@ -31,12 +50,12 @@ database.ref('expenses').on('value', (snapshot) => {
 //     console.log(expenses);
 //   });
 
-// database.ref('expenses').push({
-//   description: 'Comic Books',
-//   note: 'Do not steal',
-//   amount: 800,
-//   createdAt: 1000
-// });
+database.ref('expenses').push({
+  description: 'Cupie Doll',
+  note: 'Do not steal',
+  amount: 800,
+  createdAt: 1000
+});
 
 
 
